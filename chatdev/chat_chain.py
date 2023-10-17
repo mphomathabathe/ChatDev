@@ -100,6 +100,19 @@ class ChatChain:
                                          model_type=self.model_type,
                                          log_filepath=self.log_filepath)
             self.phases[phase] = phase_instance
+            
+        with open(self.config_role_path, 'r') as file:
+        self.config_role = json.load(file)   
+
+    def get_role_for_phase(self, phase_name):
+        # Assuming each phase_name corresponds to a role in RoleConfig.json.
+        return self.config_role.get(phase_name, {}).get('role', "")
+
+    def get_role_message(self, role_name):
+        # This function fetches the role's message from RoleConfig.
+        # Let's assume role_name directly maps to a message for simplification.
+        # Adjust accordingly if your RoleConfig.json structure is different.
+        return self.config_role.get(role_name, {}).get('message', "")
 
     def make_recruitment(self):
         """
@@ -122,6 +135,10 @@ class ChatChain:
 
         phase = phase_item['phase']
         phase_type = phase_item['phaseType']
+         # Role Presentation Logic
+        role_name = self.get_role_for_phase(phase)
+        role_message = self.get_role_message(role_name)
+        print(role_message)
         # For SimplePhase, just look it up from self.phases and conduct the "Phase.execute" method
         if phase_type == "SimplePhase":
             max_turn_step = phase_item['max_turn_step']

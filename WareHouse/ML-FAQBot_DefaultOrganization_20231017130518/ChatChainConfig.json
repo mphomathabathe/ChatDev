@@ -34,18 +34,18 @@
     {
       "phase": "CodeReview",
       "phaseType": "ComposedPhase",
-      "cycleNum": 2,
+      "cycleNum": 3,
       "Composition": [
         {
           "phase": "CodeReviewComment",
           "phaseType": "SimplePhase",
-          "max_turn_step": -1,
+          "max_turn_step": 1,
           "need_reflect": "False"
         },
         {
           "phase": "CodeReviewModification",
           "phaseType": "SimplePhase",
-          "max_turn_step": -1,
+          "max_turn_step": 1,
           "need_reflect": "False"
         }
       ]
